@@ -1,0 +1,839 @@
+<xaal version="1.0" xmlns="http://www.cs.hut.fi/Research/SVG/XAAL"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.cs.hut.fi/Research/SVG/XAAL xaal.xsd">
+  <initial>
+    <text id="TextTitle">
+      <coordinate x="40" y="200"></coordinate>
+      <alignment value="left" />
+      <boxed value="false" />
+      <contents>XAAL Examples</contents>
+      <style>
+        <color name="black" />
+        <fill-color name="black" />
+        <font size="80" />
+      </style>
+    </text>
+  </initial>
+  <animation>
+    <par>
+      <narrative>Examples for predefined colors</narrative>
+      <hide type="all" />
+      <create>
+        <rectangle id="Rect1ColorExamples">
+          <coordinate x="40" y="20" />
+          <coordinate x="80" y="60" />
+          <style>
+            <color name="black" />
+            <fill-color name="maroon" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect2ColorExamples">
+          <coordinate>
+            <offset x="20" base-object="Rect1ColorExamples" anchor="NE" />
+          </coordinate>
+          <coordinate x="140" y="60" />
+          <style>
+            <color name="black" />
+            <fill-color name="red" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect3ColorExamples">
+          <coordinate x="160" y="20" />
+          <coordinate x="200" y="60" />
+          <style>
+            <color name="black" />
+            <fill-color name="orange" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect4ColorExamples">
+          <coordinate x="220" y="20" />
+          <coordinate x="260" y="60" />
+          <style>
+            <color name="black" />
+            <fill-color name="yellow" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect5ColorExamples">
+          <coordinate x="280" y="20" />
+          <coordinate x="320" y="60" />
+          <style>
+            <color name="black" />
+            <fill-color name="olive" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect6ColorExamples">
+          <coordinate x="340" y="20" />
+          <coordinate x="380" y="60" />
+          <style>
+            <color name="black" />
+            <fill-color name="purple" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect7ColorExamples">
+          <coordinate x="40" y="80" />
+          <coordinate x="80" y="120" />
+          <style>
+            <color name="black" />
+            <fill-color name="fuchsia" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect8ColorExamples">
+          <coordinate x="100" y="80" />
+          <coordinate x="140" y="120" />
+          <style>
+            <color name="black" />
+            <fill-color name="white" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect9ColorExamples">
+          <coordinate x="160" y="80" />
+          <coordinate x="200" y="120" />
+          <style>
+            <color name="black" />
+            <fill-color name="lime" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect10ColorExamples">
+          <coordinate x="220" y="80" />
+          <coordinate x="260" y="120" />
+          <style>
+            <color name="black" />
+            <fill-color name="green" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect11ColorExamples">
+          <coordinate x="280" y="80" />
+          <coordinate x="320" y="120" />
+          <style>
+            <color name="black" />
+            <fill-color name="navy" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect12ColorExamples">
+          <coordinate x="340" y="80" />
+          <coordinate x="380" y="120" />
+          <style>
+            <color name="black" />
+            <fill-color name="aqua" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect13ColorExamples">
+          <coordinate x="40" y="140" />
+          <coordinate x="80" y="180" />
+          <style>
+            <color name="black" />
+            <fill-color name="teal" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect14ColorExamples">
+          <coordinate x="100" y="140" />
+          <coordinate x="140" y="180" />
+          <style>
+            <color name="black" />
+            <fill-color name="black" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect15ColorExamples">
+          <coordinate x="160" y="140" />
+          <coordinate x="200" y="180" />
+          <style>
+            <color name="black" />
+            <fill-color name="silver" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect16ColorExamples">
+          <coordinate x="220" y="140" />
+          <coordinate x="260" y="180" />
+          <style>
+            <color name="black" />
+            <fill-color name="gray" />
+          </style>
+        </rectangle>
+        <rectangle id="Rect17ColorExamples">
+          <coordinate x="280" y="140" />
+          <coordinate x="320" y="180" />
+          <style>
+            <color name="black" />
+            <fill-color name="blue" />
+          </style>
+        </rectangle>
+        <text id="TextColorExamples">
+          <coordinate x="100" y="240" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of predefined colors</contents>
+          <style id="TextStyle">
+            <color name="black" />
+            <font size="20" />
+          </style>
+        </text>
+      </create>
+    </par>
+    <par>
+      <narrative>Example of element rectangle</narrative>
+      <hide type="all" />
+      <create>
+        <rectangle id="Rectangle1" hidden="false" opacity="1.0">
+          <coordinate x="20" y="20" id="Coordinate1" />
+          <coordinate x="100" y="100" id="Coordinate2" />
+          <style>
+            <color name="black" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle2" hidden="false" opacity="1.0">
+          <coordinate x="120" y="20" />
+          <coordinate x="200" y="100" />
+          <style>
+            <fill-color name="red" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle3" hidden="false" opacity="1.0">
+          <coordinate x="220" y="20" />
+          <coordinate x="300" y="100" />
+          <round x="50" y="50" />
+          <style>
+            <color name="black" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle4" hidden="false" opacity="1.0">
+          <coordinate x="320" y="20" />
+          <coordinate x="400" y="100" />
+          <round x="50" y="50" />
+          <style>
+            <fill-color name="red" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle5" hidden="false" opacity="1.0">
+          <coordinate x="20" y="120" />
+          <coordinate x="100" y="200" />
+          <style>
+            <color name="blue" />
+            <stroke width="6" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle6" hidden="false" opacity="1.0">
+          <coordinate x="120" y="120" />
+          <coordinate x="200" y="200" />
+          <style>
+            <color name="blue" />
+            <fill-color name="green" />
+            <stroke width="6" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle7" hidden="false" opacity="1.0">
+          <coordinate x="220" y="120" />
+          <coordinate x="300" y="200" />
+          <round x="50" y="80" />
+          <style>
+            <color name="blue" />
+            <stroke width="6" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle8" hidden="false" opacity="1.0">
+          <coordinate x="320" y="120" />
+          <coordinate x="400" y="200" />
+          <round x="50" y="80" />
+          <style>
+            <fill-color name="green" />
+          </style>
+        </rectangle>
+        <text id="Text1" style="TextStyle">
+          <coordinate x="100" y="240" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of element rectangle</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <rectangle id="Rectangle2-1" hidden="false" opacity="1.0">
+          <coordinate y="20" />
+          <coordinate x="100" y="100" />
+          <style id="Style1">
+            <color name="black" />
+            <fill-color name="red" />
+          </style>
+        </rectangle>
+        <rectangle id="Rectangle2-2" hidden="false" opacity="1.0"
+          style="Style1">
+          <coordinate x="120" />
+          <coordinate x="200" y="100" />
+        </rectangle>
+        <rectangle id="Rectangle2-3" hidden="false" opacity="1.0"
+          style="Style1">
+          <coordinate x="120" y="20" />
+          <coordinate x="120" y="100" />
+        </rectangle>
+        <rectangle id="Rectangle2-4" hidden="false" opacity="1.0"
+          style="Style1">
+          <coordinate x="120" y="20" />
+          <coordinate x="200" y="20" />
+        </rectangle>
+        <rectangle id="Rectangle2-5" hidden="false" opacity="1.0"
+          style="Style1">
+          <coordinate x="20" y="120" />
+          <coordinate x="100" y="200" />
+          <round y="50" />
+        </rectangle>
+        <rectangle id="Rectangle2-6" hidden="false" opacity="1.0"
+          style="Style1">
+          <coordinate x="120" y="120" />
+          <coordinate x="200" y="200" />
+          <round x="50" />
+        </rectangle>
+        <text id="Text2" style="TextStyle">
+          <coordinate x="100" y="240" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of element rectangle</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <circle>
+          <center x="100" y="100" />
+          <radius length="50" />
+          <style>
+            <color name="black" />
+          </style>
+        </circle>
+        <circle>
+          <center x="220" y="100" />
+          <radius length="35" />
+          <style>
+            <color name="black" />
+            <fill-color name="red" />
+          </style>
+        </circle>
+        <circle>
+          <center x="340" y="100" />
+          <radius length="20" />
+          <style>
+            <color name="lime" />
+            <fill-color name="black" />
+            <stroke width="4" />
+          </style>
+        </circle>
+        <circle>
+          <center x="100" y="260" />
+          <radius length="20" />
+          <style>
+            <color name="yellow" />
+            <fill-color name="lime" />
+            <stroke width="4" />
+          </style>
+        </circle>
+        <circle>
+          <center x="220" y="260" />
+          <radius length="35" />
+          <style>
+            <fill-color name="blue" />
+          </style>
+        </circle>
+        <circle>
+          <center x="340" y="260" />
+          <radius length="50" />
+          <style>
+            <color name="red" />
+            <stroke width="10" />
+          </style>
+        </circle>
+        <text style="TextStyle">
+          <coordinate x="100" y="340" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of element circle</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <circle style="Style1">
+          <center />
+          <radius length="50" />
+        </circle>
+        <circle style="Style1">
+          <center y="100" />
+          <radius length="50" />
+        </circle>
+        <circle style="Style1">
+          <center x="100" />
+          <radius length="50" />
+        </circle>
+        <circle style="Style1">
+          <center x="100" y="100" />
+          <radius length="50" />
+        </circle>
+        <text style="TextStyle">
+          <coordinate x="100" y="240" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of element circle</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <line>
+          <coordinate x="38" y="137" />
+          <coordinate x="113" y="50" />
+          <style>
+            <color name="black" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="113" y="137" />
+          <coordinate x="188" y="50" />
+          <style>
+            <color name="red" />
+            <stroke width="5" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="188" y="137" />
+          <coordinate x="263" y="50" />
+          <style>
+            <color name="green" />
+            <stroke width="8" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="263" y="137" />
+          <coordinate x="338" y="50" />
+          <style>
+            <color name="blue" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="338" y="137" />
+          <coordinate x="413" y="50" />
+          <style>
+            <color name="fuchsia" />
+            <stroke width="13" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="170" y="200" />
+          <coordinate x="220" y="200" />
+          <style id="LineStyle">
+            <color name="black" />
+            <stroke width="1" />
+          </style>
+        </line>
+        <line style="LineStyle">
+          <coordinate x="220" y="200" />
+          <coordinate x="220" y="250" />
+        </line>
+        <line style="LineStyle">
+          <coordinate x="220" y="250" />
+          <coordinate x="270" y="250" />
+        </line>
+        <line style="LineStyle">
+          <coordinate x="270" y="250" />
+          <coordinate x="270" y="200" />
+        </line>
+        <line style="LineStyle">
+          <coordinate x="270" y="200" />
+          <coordinate x="320" y="200" />
+        </line>
+        <line>
+          <coordinate x="25" y="200" />
+          <coordinate x="75" y="200" />
+          <style id="LineStyle2">
+            <color name="blue" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <line style="LineStyle2">
+          <coordinate x="75" y="200" />
+          <coordinate x="75" y="250" />
+        </line>
+        <line style="LineStyle2">
+          <coordinate x="75" y="250" />
+          <coordinate x="125" y="250" />
+        </line>
+        <line style="LineStyle2">
+          <coordinate x="125" y="250" />
+          <coordinate x="125" y="200" />
+        </line>
+        <line style="LineStyle2">
+          <coordinate x="125" y="200" />
+          <coordinate x="175" y="200" />
+        </line>
+        <line>
+          <coordinate x="370" y="250" />
+          <coordinate x="420" y="250" />
+          <style>
+            <color name="black" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="420" y="200" />
+          <coordinate x="470" y="200" />
+          <style>
+            <color name="fuchsia" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="320" y="200" />
+          <coordinate x="370" y="200" />
+          <style>
+            <color name="blue" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="370" y="200" />
+          <coordinate x="370" y="250" />
+          <style>
+            <color name="green" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <line>
+          <coordinate x="420" y="250" />
+          <coordinate x="420" y="200" />
+          <style>
+            <color name="red" />
+            <stroke width="10" />
+          </style>
+        </line>
+        <text style="TextStyle">
+          <coordinate x="150" y="290" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of line</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <polygon>
+          <coordinate x="59" y="45" />
+          <coordinate x="95" y="63" />
+          <coordinate x="108" y="105" />
+          <coordinate x="82" y="139" />
+          <coordinate x="39" y="140" />
+          <coordinate x="11" y="107" />
+          <coordinate x="19" y="65" />
+          <style>
+            <color name="black" />
+          </style>
+        </polygon>
+        <polygon>
+          <coordinate x="179" y="45" />
+          <coordinate x="218" y="63" />
+          <coordinate x="228" y="105" />
+          <coordinate x="202" y="139" />
+          <coordinate x="159" y="140" />
+          <coordinate x="131" y="107" />
+          <coordinate x="139" y="65" />
+          <coordinate x="179" y="45" />
+          <style>
+            <fill-color name="red" />
+          </style>
+        </polygon>
+        <polygon>
+          <coordinate x="350" y="45" />
+          <coordinate x="375" y="80" />
+          <coordinate x="410" y="95" />
+          <coordinate x="375" y="110" />
+          <coordinate x="350" y="145" />
+          <coordinate x="325" y="120" />
+          <coordinate x="290" y="95" />
+          <coordinate x="325" y="70" />
+          <coordinate x="350" y="45" />
+          <style>
+            <color name="black" />
+            <fill-color name="blue" />
+            <stroke width="6" />
+          </style>
+        </polygon>
+        <polygon>
+          <coordinate x="59" y="185" />
+          <coordinate x="98" y="203" />
+          <coordinate x="108" y="245" />
+          <coordinate x="82" y="279" />
+          <coordinate x="39" y="280" />
+          <coordinate x="11" y="247" />
+          <coordinate x="19" y="205" />
+          <coordinate x="59" y="185" />
+          <style>
+            <color red="0" green="0" blue="255" />
+            <stroke width="8" />
+          </style>
+        </polygon>
+        <polygon>
+          <coordinate x="179" y="185" />
+          <coordinate x="218" y="203" />
+          <coordinate x="228" y="245" />
+          <coordinate x="202" y="279" />
+          <coordinate x="159" y="280" />
+          <coordinate x="131" y="247" />
+          <coordinate x="139" y="205" />
+          <style>
+            <color red="0" green="0" blue="255" />
+            <fill-color red="0" green="255" blue="0" />
+            <stroke width="8" />
+          </style>
+        </polygon>
+        <polygon>
+          <coordinate x="270" y="225" />
+          <coordinate x="300" y="245" />
+          <coordinate x="320" y="225" />
+          <coordinate x="340" y="245" />
+          <coordinate x="280" y="280" />
+          <coordinate x="390" y="280" />
+          <coordinate x="420" y="240" />
+          <coordinate x="280" y="185" />
+          <style>
+            <color red="0" green="255" blue="0" />
+            <stroke width="8" />
+          </style>
+        </polygon>
+        <text style="TextStyle">
+          <coordinate x="150" y="340" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of polygons</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <polyline id="polyline-01">
+          <coordinate x="10" y="50" />
+          <coordinate x="35" y="150" />
+          <coordinate x="60" y="50" />
+          <coordinate x="85" y="150" />
+          <coordinate x="110" y="50" />
+          <coordinate x="135" y="150" />
+          <closed value="false" />
+          <style>
+            <color red="0" green="0" blue="0" />
+          </style>
+        </polyline>
+        <polyline id="polyline-02">
+          <coordinate x="220" y="50" />
+          <coordinate x="267" y="84" />
+          <coordinate x="249" y="140" />
+          <coordinate x="190" y="140" />
+          <coordinate x="172" y="84" />
+          <coordinate x="220" y="50" />
+          <closed value="false" />
+          <style>
+            <color name="blue" />
+            <stroke width="8" />
+          </style>
+        </polyline>
+        <polyline id="polyline-03">
+          <coordinate x="310" y="50" />
+          <coordinate x="335" y="150" />
+          <coordinate x="360" y="50" />
+          <coordinate x="385" y="150" />
+          <coordinate x="410" y="50" />
+          <coordinate x="435" y="150" />
+          <closed value="false" />
+          <style>
+            <color red="0" green="255" blue="0" />
+            <fill-color name="blue" />
+            <stroke width="4" />
+          </style>
+        </polyline>
+        <polyline id="polyline-04">
+          <coordinate x="59" y="185" />
+          <coordinate x="98" y="203" />
+          <coordinate x="108" y="245" />
+          <coordinate x="82" y="279" />
+          <coordinate x="39" y="280" />
+          <coordinate x="11" y="247" />
+          <coordinate x="19" y="205" />
+          <closed value="false" />
+          <style>
+            <color name="red" />
+            <stroke width="8" />
+          </style>
+        </polyline>
+        <polyline id="polyline-05">
+          <coordinate x="189" y="185" />
+          <coordinate x="228" y="203" />
+          <coordinate x="238" y="245" />
+          <coordinate x="212" y="279" />
+          <coordinate x="169" y="280" />
+          <coordinate x="141" y="247" />
+          <coordinate x="149" y="205" />
+          <closed value="false" />
+          <style>
+            <color red="0" green="0" blue="255" />
+            <fill-color red="0" green="255" blue="0" />
+            <stroke width="8" />
+          </style>
+        </polyline>
+        <polyline id="polyline-06">
+          <coordinate x="270" y="225" />
+          <coordinate x="300" y="245" />
+          <coordinate x="320" y="225" />
+          <coordinate x="340" y="245" />
+          <coordinate x="280" y="280" />
+          <coordinate x="390" y="280" />
+          <coordinate x="420" y="240" />
+          <coordinate x="280" y="185" />
+          <closed value="false" />
+          <style>
+            <fill-color red="255" green="0" blue="255" />
+            <stroke width="8" />
+          </style>
+        </polyline>
+        <text style="TextStyle">
+          <coordinate x="150" y="340" />
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>Example of polylines</contents>
+        </text>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <array>
+          <structure-property name="name" value="Basic array" />
+          <coordinate x="10" y="20" />
+          <index>
+            <key value="demoA">
+              <style>
+                <color name="orange" />
+              </style>
+            </key>
+          </index>
+          <index>
+            <style>
+              <fill-color red="125" green="125" blue="125" />
+              <stroke width="3" />
+            </style>
+            <key value="demoB">
+              <style>
+                <color red="255" green="255" blue="255" />
+              </style>
+            </key>
+          </index>
+          <index>
+            <style>
+              <color name="teal" />
+            </style>
+            <key value="demoC">
+              <style>
+                <color name="red" />
+              </style>
+            </key>
+          </index>
+          <index>
+            <key value="demoD" />
+          </index>
+        </array>
+
+        <graph>
+          <structure-property name="name" value="Graph" />
+          <coordinate x="20" y="200" />
+          <node id="n1">
+            <coordinate x="50" y="0" />
+            <key value="D" />
+          </node>
+          <node id="n2">
+            <coordinate x="100" y="50" />
+            <key value="E" />
+            <style>
+              <color name="red" />
+              <fill-color name="yellow" />
+              <stroke width="3" />
+            </style>
+          </node>
+          <node id="n3">
+            <coordinate x="50" y="100" />
+            <style>
+              <color name="green" />
+              <fill-color name="orange" />
+            </style>
+            <key value="M" />
+          </node>
+          <node id="n4">
+            <coordinate x="0" y="50" />
+            <key value="O" />
+          </node>
+          <edge from="n1" to="n2" directed="true" />
+          <edge from="n2" to="n3" directed="true" />
+          <edge from="n3" to="n4" directed="true" />
+          <edge from="n4" to="n1" directed="true">
+            <style>
+              <color name="green" />
+              <stroke width="3" />
+            </style>
+          </edge>
+        </graph>
+        <list id="list1">
+          <coordinate x="310" y="20" />
+          <structure-property name="name" value="Linked List 1" />
+          <node id="n1">
+            <key value="D" />
+          </node>
+          <node id="n2">
+            <key value="E" />
+          </node>
+          <node id="n3">
+            <key value="M" />
+          </node>
+          <node id="n4">
+            <key value="O" />
+          </node>
+          <edge from="n1" to="n2" />
+          <edge from="n2" to="n3" />
+          <edge from="n3" to="n4" />
+        </list>
+        <tree root="root">
+          <structure-property name="name" value="Tree" />
+          <coordinate x="310" y="200" />
+          <node id="root">
+            <key value="R" />
+          </node>
+          <node id="ch1">
+            <key value="1" />
+          </node>
+          <node id="ch2">
+            <key value="2" />
+          </node>
+          <node id="ch3">
+            <key value="3" />
+          </node>
+          <edge from="root" to="ch1" />
+          <edge from="root" to="ch2" />
+          <edge from="root" to="ch3" />
+        </tree>
+      </create>
+    </par>
+    <par>
+      <hide type="all" />
+      <create>
+        <text id="TextEndTitle">
+          <coordinate x="100" y="200"></coordinate>
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>That's all... for now!</contents>
+          <style>
+            <color name="black" />
+            <font size="50" />
+          </style>
+        </text>
+      </create>
+    </par>
+  </animation>
+</xaal>
