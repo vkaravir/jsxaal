@@ -1,0 +1,105 @@
+require 'rake'
+#require 'rake/packagetask'
+
+PKG_NAME        = 'jsxaal-viewer'
+PKG_NICKNAME    = 'jsxaal'
+PKG_BUILD       = ENV['PKG_BUILD'] ? '.' + ENV['PKG_BUILD'] : ''
+PKG_TIMESTAMP   = Time.new.to_s
+PKG_VERSION     = '0.1' + PKG_BUILD
+PKG_FILE_NAME   = "#{PKG_NAME}-#{PKG_VERSION}"
+PKG_DESTINATION = "dist"
+REL_DESTINATION = "release" 
+
+task :default => [:dist]
+
+task :clean do
+  rm_rf PKG_DESTINATION
+end
+
+BASE_SRC_FILES = FileList[
+  "src/jsxaal-viewer.js",
+  "src/parser/jsxaal-parser.js",
+  "src/parser/jsxaal-questionparser.js",
+  "src/parser/jsxaal-gpparser.js",
+  "src/parser/jsxaal-animparser.js",
+  "src/parser/jsxaal-dsparser.js",
+  "src/parser/jsxaal-mainparser.js",
+  "src/ui/graphics.js",
+  "src/ui/jsxaal-ui.js",
+  "src/ui/jsxaal-renderer.js",
+  "src/ui/jsxaal-effects.js",
+  "src/ui/jsxaal-question.js",
+  "src/jsxaal-animator.js",
+  "src/jsxaal-viewersettings.js",
+  "src/jsxaal-util.js",
+  "src/structures/structure.js",
+  "src/structures/tree.js",
+  "src/structures/list.js",
+  "src/structures/array.js",
+  "src/structures/graph.js"
+]
+
+desc "Builds the distribution"
+task :dist do
+  system "rm -rf #{PKG_DESTINATION}/*js;mkdir -p #{PKG_DESTINATION}"
+  BASE_SRC_FILES.each do |file|
+    system "cat #{file} >> " +  File.join(PKG_DESTINATION, PKG_NICKNAME + "-core.js")
+  end
+  system "ruby bin/jsmin.rb < " + File.join(PKG_DESTINATION, PKG_NICKNAME + "-core.js") + " > " + File.join(PKG_DESTINATION, PKG_NICKNAME + "-core-min.js")
+
+  system "cp src/ui/jsxaal.css #{PKG_DESTINATION}"
+  system "cp -r src/ui/images #{PKG_DESTINATION}"
+end
+
+desc "Builds a release"
+task :release do
+  system "rm -rf #{REL_DESTINATION};mkdir #{REL_DESTINATION};mkdir #{REL_DESTINATION}/lib;mkdir #{REL_DESTINATION}/dist"
+  system "cp dist/jsxaal-core.js #{REL_DESTINATION}/dist"
+  system "cp lib/prototype/prototype.js #{REL_DESTINATION}/lib"
+  system "cp lib/scriptaculous/scriptaculous.js #{REL_DESTINATION}/lib"
+  system "cp lib/scriptaculous/effects.js #{REL_DESTINATION}/lib"
+  system "cp lib/scriptaculous/effects.js #{REL_DESTINATION}/lib"
+  system "cp lib/scriptaculous/effects.js #{REL_DESTINATION}/lib"
+  system "cp lib/pgf/pgf-core.js #{REL_DESTINATION}/lib"
+  system "cp lib/pgf/pgf-renderer.js #{REL_DESTINATION}/lib"
+  system "cp lib/progressBar/ProgressBar-1.0.1.js #{REL_DESTINATION}/lib"
+end
+#Rake::PackageTask.new('prototype', PROTOTYPE_VERSION) do |package|
+#  package.need_tar_gz = true
+#  package.package_dir = PROTOTYPE_PKG_DIR
+#  package.package_files.include(
+#    '[A-Z]*',
+#    'dist/prototype.js',
+#    'lib/**',
+#    'src/**',
+#    'test/**'
+#  )
+#end
+
+desc "Builds the distribution, runs the JavaScript unit tests and collects their results."
+task :test => [:dist, :test_units]
+
+require 'test/lib/jstest'
+desc "Runs all the JavaScript unit tests and collects the results"
+JavaScriptTestTask.new(:test_units) do |t|
+  testcases        = ENV['TESTCASES']
+  tests_to_run     = ENV['TESTS']    && ENV['TESTS'].split(',')
+  browsers_to_test = ENV['BROWSERS'] && ENV['BROWSERS'].split(',')
+  
+  t.mount("/dist")
+  t.mount("/test")
+  t.mount("/lib")
+  
+  Dir["test/unit/*.html"].sort.each do |test_file|
+    tests = testcases ? { :url => "/#{test_file}", :testcases => testcases } : "/#{test_file}"
+    test_filename = test_file[/.*\/(.+?)\.html/, 1]
+    t.run(tests) unless tests_to_run && !tests_to_run.include?(test_filename)
+  end
+  
+  %w( firefox safari opera ).each do |browser|
+    t.browser(browser.to_sym) unless browsers_to_test && !browsers_to_test.include?(browser)
+  end
+#  %w( safari firefox ie konqueror opera ).each do |browser|
+#    t.browser(browser.to_sym) unless browsers_to_test && !browsers_to_test.include?(browser)
+#  end
+end
