@@ -1,0 +1,100 @@
+.jsxaal-drawing {
+    border: 1pt solid black;
+    float: left;
+    display: block;
+    background-color: white;
+    width: 99%;
+    height: 90%;
+    position: relative;
+    z-index: 1000;
+    clear: both;
+}
+
+.jsxaal-narrative {
+    border: 1pt solid black;
+    float: right;
+    display: inline;
+    height: 90%;
+    width: 35%;
+    background-color: white;
+}
+
+.jsxaal {
+    background-image: url('images/bg-gradient.png');
+    background-repeat: repeat-x;
+    padding: 10px;
+    border: 1pt solid black;
+    height: 550px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    width: 650px;
+    margin: 0 auto;
+}
+
+.jsxaal-settings {
+    clear: both;
+    float: left;
+}
+
+#jsxaal-interaction {
+    z-index: 1000;
+    position: fixed;
+    top: 10%;
+    left: 40%;
+    background: white;
+    padding: 10px;
+    border: 1pt solid black;
+}
+
+.jsxaal-node {
+    color: green;
+    background-color: yellow;
+    width: 70px;
+}
+
+.jsxaal-node-text {
+    color: black;
+    background-color: black;
+}
+
+.jsxaal-slider {
+    float: left;
+    height: 30px;
+    position: relative;
+}
+
+.jsxaal-sliderelem {
+    height: 18px;
+    width: 200px;
+    display: block;
+    background-color:lightGrey;
+}
+
+.jsxaal-animation-panel {
+    margin: 0 auto;
+}
+
+.jsxaal-counter {
+    font-size:90%;
+    padding: 3px;
+}
+.jsxaal-additionalview {
+float:left;
+}
+.zoom img {
+	border: none;
+}
+.zoom {
+	padding: 3px 8px 8px;
+	width: 15px;
+	height: 15px;
+	margin-left: 5px;
+	background-repeat: no-repeat;
+}
+
+.zoomIn {
+  background-image: url("images/zoom-in.png");
+  }
+.zoomOut {
+  background-image: url("images/zoom-out.png");
+  }
