@@ -20,6 +20,5 @@ JSXaalMainParser.renderShapeDefElement = function (viewer, shapeDef) {
 	if (!viewer.shapes) {
 		viewer.shapes = new Hash();
 	}
-	debug("shapedef id "+shapeDef.readAttribute("name"));
 	viewer.shapes[shapeDef.readAttribute("name")] = shapes;
 };
