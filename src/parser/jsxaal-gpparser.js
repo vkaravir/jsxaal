@@ -317,21 +317,19 @@ JSXaalParserGP.getCoordinate = function(viewer, coordElem) {
         var pos = JSXaalParserGP.getObjectCoordinate(viewer, offset.readAttribute("base-object"), offset.readAttribute("anchor"));
         return {x: Number(coordElem.readAttribute("x")) + coords.x + pos.x, y: Number(coordElem.readAttribute("y")) + coords.y + pos.y};
     }
+    return {x: 0, y: 0};
 };
 
 JSXaalParserGP.getObjectCoordinate = function(viewer, baseObj, anchor) {
     var obj = viewer.dsStore.get(baseObj);
-    anchor = anchor.toUpperCase();
-    // TODO check anchor
     if (obj) {
-        debug("succesful offset: " + baseObj);
-        return obj.getPosition();
+        obj = viewer.renderer.get(obj.getId() + viewer.id);
+    } else {
+    	obj = viewer.renderer.get(baseObj + viewer.id);
     }
-    obj = viewer.renderer.get(baseObj + viewer.id);
     if (obj) {
-    	var r = obj.getLocation();
-    	r.w = obj.getSize().w;
-    	r.h = obj.getSize().h;
+    	anchor = anchor.toUpperCase();
+    	var r = obj.getBounds();
         if (anchor == "NW") {
             return {"x": r.x, "y": r.y};
         } else if (anchor == "N") {
@@ -357,13 +355,10 @@ JSXaalParserGP.getObjectCoordinate = function(viewer, baseObj, anchor) {
         }
         return obj.getLocation();
     }
-    debug("failed to get offset location:"+baseObj);
     return {x:0,y:0};
 };
 JSXaalParserGP.renderShapeElement = function(viewer, shapeNode) {
 	var id = shapeNode.readAttribute("uses");
-	debug("shape id:"+id);
-	debug(viewer.shapes);
 	var coord = {x:0, y:0};
 	var children = shapeNode.childElements();
 	for (var i=0; i<children.length; i++) {
