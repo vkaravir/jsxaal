@@ -137,8 +137,12 @@ JSXaal.Util.cloneShapeObject = function(viewer, shape) {
 	} else if (shape instanceof Graphic.Circle) {
 		newShape = new Graphic.Circle(viewer.renderer);
 		newShape._setAttributes(Object.toJSON(shape.attributes).evalJSON());
+	} else if (shape instanceof Graphic.Text) {
+		newShape = new Graphic.Text(viewer.renderer);
+		newShape._setAttributes(Object.toJSON(shape.attributes).evalJSON());
+		//XXX: This is SVGRenderer-specific!
+		newShape.setTextValue(shape.element.firstChild.nodeValue);
 	}
-	debug('new id '+newShape.getID());
 	return newShape;
 }
 /**
