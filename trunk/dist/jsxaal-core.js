@@ -1,4 +1,8 @@
 /**
+ * @project JSXaal
+ * @version 0.1b
+ * @author Ville Karavirta (vkaravir@cs.hut.fi)
+ * @description <a href=".">JSXaal</a>
  * @file jsxaal-viewer.js This file contains the main class of the JSXaal viewer.
  */
 var JSXaal = Class.create();
@@ -252,40 +256,9 @@ var JSXaalParser = Class.create({
 	}
 });var JSXaalInteractionParser = {};
 JSXaalInteractionParser.register = function(parser) {
-	//parser.registerElementHandlerFunction("question", JSXaalInteractionParser.renderQuestionElement);
 	parser.registerElementHandlerFunction("select-one", JSXaalInteractionParser.renderSelectOneElement);
 	parser.registerElementHandlerFunction("select", JSXaalInteractionParser.renderSelectElement);
 };
-// for jhave type of questions
-/*JSXaalInteractionParser.renderQuestionElement = function(viewer, qNode) {
-	var children = qNode.childNodes;
-	var type = qNode.readAttribute("type");
-	var q;
-	if (type == 'TFQUESTION') {
-		q = new JSXaalTFQuestion(qNode.readAttribute("id"), viewer);
-	}
-	if (!q) {
-		return;
-	}
-	var answerOptions = [];
-	var question = '';
-	for (var i = 0; i < children.length; i++) {
-		var child = children[i];
-		if (child.nodeType == 1) {
-			//alert(child);
-			if (child.nodeName.toLowerCase() == 'question_text') {
-				question = JSXaal.Util.getContentsAsText(child);
-			} else if (child.nodeName.toLowerCase() == 'answer_option') {
-				q.addAnswerOption(JSXaal.Util.getContentsAsText(child), child.attributes);
-			}
-		}
-	}
-	q.setQuestionText(question);
-	//alert("answerOptions:\n"+answerOptions);
-	viewer.ui.showQuestion(q);
-	//viewer.renderer.add(circle);
-	return {type: type, question: question, answerOptions: answerOptions};
-};*/
 /**
  * @function {public void} ?
  * @param {Object} viewer
@@ -295,30 +268,39 @@ JSXaalInteractionParser.renderSelectOneElement = function(viewer, node) {
 	var children = node.childElements();
 	var q = new JSXaal.Question.SelectOne(node.readAttribute("id"), viewer);
 	var solutionId = node.readAttribute("solutionId");
-	for (var i = 0; i < children.length; i++) {
-		var child = children[i];
-		if (child.nodeName.toLowerCase() == 'contents' && child.readAttribute("type") == "label") {
-			q.setQuestionText(JSXaal.Util.getContentsAsText(child));
-		} else if (child.nodeName.toLowerCase() == 'item') {
-			var item = new JSXaal.Question.Item(child.readAttribute("id"));
-			var contents = child.getElementsByTagName("contents");
-			for (var j=0; j<contents.length; j++) {
-				if (contents[j].readAttribute("type") == "answer") {
-					item.setAnswer(JSXaal.Util.getContentsAsText(contents[j]));
-				} else if (contents[j].readAttribute("feedback")) {
-					item.setFeedback(JSXaal.Util.getContentsAsText(contents[j]));
+	var answered = node.getElementsByTagName("student-answer").length > 0;
+	if (!answered) {
+		for ( var i = 0; i < children.length; i++) {
+			var child = children[i];
+			if (child.nodeName.toLowerCase() == 'contents'
+					&& child.readAttribute("type") == "label") {
+				q.setQuestionText(JSXaal.Util.getContentsAsText(child));
+			} else if (child.nodeName.toLowerCase() == 'item') {
+				var item = new JSXaal.Question.Item(child.readAttribute("id"));
+				var contents = child.getElementsByTagName("contents");
+				for ( var j = 0; j < contents.length; j++) {
+					if (contents[j].readAttribute("type") == "answer") {
+						item.setAnswer(JSXaal.Util
+								.getContentsAsText(contents[j]));
+					} else if (contents[j].readAttribute("feedback")) {
+						item.setFeedback(JSXaal.Util
+								.getContentsAsText(contents[j]));
+					}
 				}
+				if (solutionId && solutionId == child.readAttribute("id")) {
+					q.setCorrectAnswer(item);
+				}
+				q.addAnswerOption(item);
+			} else if (child.nodeName.toLowerCase() == 'student-answer') {
+				answered = true;
+				break;
 			}
-			if (solutionId && solutionId == child.readAttribute("id")) {
-				q.setCorrectAnswer(item);
-			}
-			q.addAnswerOption(item);
 		}
+		if (viewer.settings.isStoreQuestionAnswers()) {
+			q.setXmlNode(node);
+		}
+		viewer.ui.showQuestion(q);
 	}
-	if (viewer.settings.isStoreQuestionAnswers()) {
-		q.setXmlNode(node);
-	}
-	viewer.ui.showQuestion(q);
 };
 /**
  * @function {public void} ?
@@ -329,31 +311,40 @@ JSXaalInteractionParser.renderSelectElement = function(viewer, node) {
 	var children = node.childElements();
 	var q = new JSXaal.Question.Select(node.readAttribute("id"), viewer);
 	var solutionId = node.readAttribute("solutionId");
-	for (var i = 0; i < children.length; i++) {
-		var child = children[i];
-		if (child.nodeName.toLowerCase() == 'contents' && child.readAttribute("type") == "label") {
-			q.setQuestionText(JSXaal.Util.getContentsAsText(child));
-		} else if (child.nodeName.toLowerCase() == 'item') {
-			var item = new JSXaal.Question.Item(child.readAttribute("id"));
-			item.setGrade(child.readAttribute("grade"));
-			var contents = child.getElementsByTagName("contents");
-			for (var j=0; j<contents.length; j++) {
-				if (contents[j].readAttribute("type") == "answer") {
-					item.setAnswer(JSXaal.Util.getContentsAsText(contents[j]));
-				} else if (contents[j].readAttribute("feedback")) {
-					item.setFeedback(JSXaal.Util.getContentsAsText(contents[j]));
+	var answered = node.getElementsByTagName("student-answer").length > 0;
+	if (!answered) { // ignore the question if student has already answered it
+		for ( var i = 0; i < children.length; i++) {
+			var child = children[i];
+			if (child.nodeName.toLowerCase() == 'contents'
+					&& child.readAttribute("type") == "label") {
+				q.setQuestionText(JSXaal.Util.getContentsAsText(child));
+			} else if (child.nodeName.toLowerCase() == 'item') {
+				var item = new JSXaal.Question.Item(child.readAttribute("id"));
+				item.setGrade(child.readAttribute("grade"));
+				var contents = child.getElementsByTagName("contents");
+				for ( var j = 0; j < contents.length; j++) {
+					if (contents[j].readAttribute("type") == "answer") {
+						item.setAnswer(JSXaal.Util
+								.getContentsAsText(contents[j]));
+					} else if (contents[j].readAttribute("feedback")) {
+						item.setFeedback(JSXaal.Util
+								.getContentsAsText(contents[j]));
+					}
 				}
+				if (solutionId && solutionId == child.readAttribute("id")) {
+					q.setCorrectAnswer(item);
+				}
+				q.addAnswerOption(item);
+			} else if (child.nodeName.toLowerCase() == 'student-answer') {
+				answered = true;
+				break;
 			}
-			if (solutionId && solutionId == child.readAttribute("id")) {
-				q.setCorrectAnswer(item);
-			}
-			q.addAnswerOption(item);
 		}
+		if (viewer.settings.isStoreQuestionAnswers()) {
+			q.setXmlNode(node);
+		}
+		viewer.ui.showQuestion(q);
 	}
-	if (viewer.settings.isStoreQuestionAnswers()) {
-		q.setXmlNode(node);
-	}
-	viewer.ui.showQuestion(q);
 };
 /**
  * @class JSXaalParserGP
@@ -674,21 +665,19 @@ JSXaalParserGP.getCoordinate = function(viewer, coordElem) {
         var pos = JSXaalParserGP.getObjectCoordinate(viewer, offset.readAttribute("base-object"), offset.readAttribute("anchor"));
         return {x: Number(coordElem.readAttribute("x")) + coords.x + pos.x, y: Number(coordElem.readAttribute("y")) + coords.y + pos.y};
     }
+    return {x: 0, y: 0};
 };
 
 JSXaalParserGP.getObjectCoordinate = function(viewer, baseObj, anchor) {
     var obj = viewer.dsStore.get(baseObj);
-    anchor = anchor.toUpperCase();
-    // TODO check anchor
     if (obj) {
-        debug("succesful offset: " + baseObj);
-        return obj.getPosition();
+        obj = viewer.renderer.get(obj.getId() + viewer.id);
+    } else {
+    	obj = viewer.renderer.get(baseObj + viewer.id);
     }
-    obj = viewer.renderer.get(baseObj + viewer.id);
     if (obj) {
-    	var r = obj.getLocation();
-    	r.w = obj.getSize().w;
-    	r.h = obj.getSize().h;
+    	anchor = anchor.toUpperCase();
+    	var r = obj.getBounds();
         if (anchor == "NW") {
             return {"x": r.x, "y": r.y};
         } else if (anchor == "N") {
@@ -714,13 +703,10 @@ JSXaalParserGP.getObjectCoordinate = function(viewer, baseObj, anchor) {
         }
         return obj.getLocation();
     }
-    debug("failed to get offset location:"+baseObj);
     return {x:0,y:0};
 };
 JSXaalParserGP.renderShapeElement = function(viewer, shapeNode) {
 	var id = shapeNode.readAttribute("uses");
-	debug("shape id:"+id);
-	debug(viewer.shapes);
 	var coord = {x:0, y:0};
 	var children = shapeNode.childElements();
 	for (var i=0; i<children.length; i++) {
@@ -1281,7 +1267,6 @@ JSXaalMainParser.renderShapeDefElement = function (viewer, shapeDef) {
 	if (!viewer.shapes) {
 		viewer.shapes = new Hash();
 	}
-	debug("shapedef id "+shapeDef.readAttribute("name"));
 	viewer.shapes[shapeDef.readAttribute("name")] = shapes;
 };/** @file graphics.js */
 /**
@@ -2065,7 +2050,14 @@ Effect.XaalMorph = Class.create(Effect.Base, {
   }
 })
 
+/**
+ * @namespace JSXaal.Question
+ */
 JSXaal.Question = new Object();
+/**
+ * An abstract superclass of all questions in JSXaal.
+ * @class {abstract} JSXaal.Question.AbstractQuestion
+ */
 JSXaal.Question.AbstractQuestion = Class.create({
 	initialize: function(id, viewer, qType) {
 		this.displayed = false;
@@ -2150,29 +2142,10 @@ JSXaal.Question.Item = Class.create({
 		return this.grade;
 	}
 });
-JSXaalTFQuestion = Class.create(JSXaal.Question.AbstractQuestion, {
-	initialize: function($super, id, viewer) {
-		$super(id, viewer, "tfquestion");
-  	},
-	addAnswerOption: function(item) {
-		if (optionText == "true") {
-			this.correctAnswer = "true";
-		} else {
-			this.correctAnswer = "false";
-		}
-	},
-	isCorrect: function() {
-		return (this.correctAnswer == this.answer);
-	},
-	getChoicesElements: function() {
-		var elems = new Array();
-		elems[0] = new Element('input', {type: "radio", name: this.getId() + "group", value:"true", onclick: "$('" + this.getId() + "-answer').value='true';"});
-		elems[1] = document.createTextNode("true");
-		elems[2] = new Element('input', {type: "radio", name: this.getId() + "group", value:"false", onclick: "$('" + this.getId() + "-answer').value='false';"});
-		elems[3] = document.createTextNode("false");
-		return elems;
-	}
-});
+/**
+ * A question where one of the given choices can be selected.
+ * @class JSXaal.Question.SelectOne @extends JSXaal.Question.AbstractQuestion
+ */
 JSXaal.Question.SelectOne = Class.create(JSXaal.Question.AbstractQuestion, {
 	initialize: function($super, id, viewer){
 		$super(id, viewer, "select-one");
@@ -2195,6 +2168,10 @@ JSXaal.Question.SelectOne = Class.create(JSXaal.Question.AbstractQuestion, {
 		return elems;
 	}
 });
+/**
+ * A question where any number of the given choices can be selected.
+ * @class JSXaal.Question.Select @extends JSXaal.Question.AbstractQuestion
+ */
 JSXaal.Question.Select = Class.create(JSXaal.Question.AbstractQuestion, {
 	initialize: function($super, id, viewer){
 		$super(id, viewer, "select");
@@ -2527,7 +2504,7 @@ var JSAnimator = Class.create({
 	},
 	/**
 	 * @function {public void} ?
-	 * @param {Object} element
+	 * @param {Object} element - an XML node describing the polygon element that was drawn.
 	 */
 	addAnnotation: function(element) {
 		var node = this.backwardStack[this.backwardStack.length - 1];
@@ -2690,11 +2667,18 @@ var JSXaalViewerSettings = Class.create({
 	isStoreQuestionAnswers: function() {
 		return this.settings.storeQuestionAnswers;
 	},
+	/**
+	 * @function {public void} ?
+	 * @param {String} lang - the language to be added
+	 */
 	addLanguage: function(lang) {
 		if (this.lang) {
 			this.lang.addLanguage(lang);
 		}
 	},
+	/**
+	 * @function {public String} ?
+	 */
 	getLanguage: function() {
 		if (this.lang) {
 			return this.lang.lang;
@@ -3059,8 +3043,12 @@ JSXaal.Util.cloneShapeObject = function(viewer, shape) {
 	} else if (shape instanceof Graphic.Circle) {
 		newShape = new Graphic.Circle(viewer.renderer);
 		newShape._setAttributes(Object.toJSON(shape.attributes).evalJSON());
+	} else if (shape instanceof Graphic.Text) {
+		newShape = new Graphic.Text(viewer.renderer);
+		newShape._setAttributes(Object.toJSON(shape.attributes).evalJSON());
+		//XXX: This is SVGRenderer-specific!
+		newShape.setTextValue(shape.element.firstChild.nodeValue);
 	}
-	debug('new id '+newShape.getID());
 	return newShape;
 }
 /**
@@ -3141,8 +3129,8 @@ JSXaal.Util.copyAttributes = function(fromElem, toElem, viewer) {
  * @function {private void} ?
  * @param {Object} fromElem
  * @param {Object} toElem
- */JSXaal.Util.copyChildElements = function(fromElem, toElem, viewer) {
-	 if (fromElem.nodeName =='radius') {debug("radius elem"+fromElem.getAttribute("length"));}
+ */
+JSXaal.Util.copyChildElements = function(fromElem, toElem, viewer) {
 	JSXaal.Util.copyAttributes(fromElem, toElem, viewer);
 	var children = fromElem.childNodes;
 	var length = children.length;
@@ -3979,11 +3967,9 @@ JSXaal.Graph = Class.create(JSXaal.Structure, {
 				return;
 			}
 		});
-		debug(this.getId()+" has coordinates "+pos);
 		return pos;
 	},
 	draw: function(viewer) {
-		debug(viewer);
 		/*if (!this._hasNodePositions()) {
 			JSXaalRenderer.util.getGraphLayout(viewer, this);
 			return;
