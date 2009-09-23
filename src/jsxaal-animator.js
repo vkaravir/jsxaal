@@ -287,7 +287,7 @@ var JSAnimator = Class.create({
 	},
 	/**
 	 * @function {public void} ?
-	 * @param {Object} element
+	 * @param {Object} element - an XML node describing the polygon element that was drawn.
 	 */
 	addAnnotation: function(element) {
 		var node = this.backwardStack[this.backwardStack.length - 1];
