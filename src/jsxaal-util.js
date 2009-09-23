@@ -223,8 +223,8 @@ JSXaal.Util.copyAttributes = function(fromElem, toElem, viewer) {
  * @function {private void} ?
  * @param {Object} fromElem
  * @param {Object} toElem
- */JSXaal.Util.copyChildElements = function(fromElem, toElem, viewer) {
-	 if (fromElem.nodeName =='radius') {debug("radius elem"+fromElem.getAttribute("length"));}
+ */
+JSXaal.Util.copyChildElements = function(fromElem, toElem, viewer) {
 	JSXaal.Util.copyAttributes(fromElem, toElem, viewer);
 	var children = fromElem.childNodes;
 	var length = children.length;
