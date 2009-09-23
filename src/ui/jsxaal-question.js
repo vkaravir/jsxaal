@@ -1,4 +1,11 @@
+/**
+ * @namespace JSXaal.Question
+ */
 JSXaal.Question = new Object();
+/**
+ * An abstract superclass of all questions in JSXaal.
+ * @class {abstract} JSXaal.Question.AbstractQuestion
+ */
 JSXaal.Question.AbstractQuestion = Class.create({
 	initialize: function(id, viewer, qType) {
 		this.displayed = false;
@@ -83,29 +90,10 @@ JSXaal.Question.Item = Class.create({
 		return this.grade;
 	}
 });
-JSXaalTFQuestion = Class.create(JSXaal.Question.AbstractQuestion, {
-	initialize: function($super, id, viewer) {
-		$super(id, viewer, "tfquestion");
-  	},
-	addAnswerOption: function(item) {
-		if (optionText == "true") {
-			this.correctAnswer = "true";
-		} else {
-			this.correctAnswer = "false";
-		}
-	},
-	isCorrect: function() {
-		return (this.correctAnswer == this.answer);
-	},
-	getChoicesElements: function() {
-		var elems = new Array();
-		elems[0] = new Element('input', {type: "radio", name: this.getId() + "group", value:"true", onclick: "$('" + this.getId() + "-answer').value='true';"});
-		elems[1] = document.createTextNode("true");
-		elems[2] = new Element('input', {type: "radio", name: this.getId() + "group", value:"false", onclick: "$('" + this.getId() + "-answer').value='false';"});
-		elems[3] = document.createTextNode("false");
-		return elems;
-	}
-});
+/**
+ * A question where one of the given choices can be selected.
+ * @class JSXaal.Question.SelectOne @extends JSXaal.Question.AbstractQuestion
+ */
 JSXaal.Question.SelectOne = Class.create(JSXaal.Question.AbstractQuestion, {
 	initialize: function($super, id, viewer){
 		$super(id, viewer, "select-one");
@@ -128,6 +116,10 @@ JSXaal.Question.SelectOne = Class.create(JSXaal.Question.AbstractQuestion, {
 		return elems;
 	}
 });
+/**
+ * A question where any number of the given choices can be selected.
+ * @class JSXaal.Question.Select @extends JSXaal.Question.AbstractQuestion
+ */
 JSXaal.Question.Select = Class.create(JSXaal.Question.AbstractQuestion, {
 	initialize: function($super, id, viewer){
 		$super(id, viewer, "select");
