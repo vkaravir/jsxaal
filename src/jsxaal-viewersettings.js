@@ -77,11 +77,18 @@ var JSXaalViewerSettings = Class.create({
 	isStoreQuestionAnswers: function() {
 		return this.settings.storeQuestionAnswers;
 	},
+	/**
+	 * @function {public void} ?
+	 * @param {String} lang - the language to be added
+	 */
 	addLanguage: function(lang) {
 		if (this.lang) {
 			this.lang.addLanguage(lang);
 		}
 	},
+	/**
+	 * @function {public String} ?
+	 */
 	getLanguage: function() {
 		if (this.lang) {
 			return this.lang.lang;
