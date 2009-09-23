@@ -1,4 +1,8 @@
 /**
+ * @project JSXaal
+ * @version 0.1b
+ * @author Ville Karavirta (vkaravir@cs.hut.fi)
+ * @description <a href=".">JSXaal</a>
  * @file jsxaal-viewer.js This file contains the main class of the JSXaal viewer.
  */
 var JSXaal = Class.create();
