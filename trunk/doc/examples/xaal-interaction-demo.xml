@@ -1,0 +1,101 @@
+<xaal version="1.0" xmlns="http://www.cs.hut.fi/Research/SVG/XAAL"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.cs.hut.fi/Research/SVG/XAAL xaal.xsd">
+  <initial>
+    <text id="TextTitle">
+      <coordinate x="120" y="100"></coordinate>
+      <alignment value="left" />
+      <boxed value="false" />
+      <contents>interactive questions</contents>
+      <style>
+        <fill-color name="black" />
+        <font size="38" bold="true" />
+      </style>
+    </text>
+  </initial>
+  <animation>
+    <par>
+      <create>
+        <tree id="tree" root="root">
+          <coordinate x="200" y="200" />
+          <node id="root">
+            <key value="C" />
+          </node>
+          <node id="node1">
+            <key value="D1" />
+          </node>
+          <node id="node2">
+            <key value="D2" />
+          </node>
+          <node id="node3">
+            <key value="D3" />
+          </node>
+          <node id="node4">
+            <key value="D4" />
+          </node>
+          <edge from="root" to="node1" />
+          <edge from="root" to="node2" />
+          <edge from="root" to="node3" />
+          <edge from="root" to="node4" />
+        </tree>
+        <text id="TextExplanation">
+          <coordinate x="120" y="160"></coordinate>
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>select-one question</contents>
+          <style>
+            <fill-color name="black" />
+            <font size="24" bold="true" />
+          </style>
+        </text>
+        <select-one id="selectOneQuestion" solutionId="it3">
+          <contents type="label">
+            How many
+            <i>children</i>
+            does the rootnode of the tree have?
+          </contents>
+          <item id="it1">
+            <contents type="answer">1</contents>
+          </item>
+          <item id="it2">
+            <contents type="answer">3</contents>
+          </item>
+          <item id="it3">
+            <contents type="answer">4</contents>
+          </item>
+        </select-one>
+      </create>
+    </par>
+    <par>
+      <hide type="selected">
+        <object-ref id="TextExplanation" />
+      </hide>
+      <create>
+        <text id="TextExplanation2">
+          <coordinate x="120" y="160"></coordinate>
+          <alignment value="left" />
+          <boxed value="false" />
+          <contents>select question</contents>
+          <style>
+            <fill-color name="black" />
+            <font size="24" bold="true" />
+          </style>
+        </text>
+      </create>
+      <select id="selectQuestion">
+        <contents type="label">Which do you want to select?
+        </contents>
+        <item id="sit1" grade="2">
+          <contents type="answer">Select me!</contents>
+        </item>
+        <item id="sit2" grade="1">
+          <contents type="answer">Select me also!</contents>
+        </item>
+        <item id="sit3" grade="-2">
+          <contents type="answer">I hope you won't select me..
+          </contents>
+        </item>
+      </select>
+    </par>
+  </animation>
+</xaal>

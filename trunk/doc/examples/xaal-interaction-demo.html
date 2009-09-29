@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <link href="../common.css" media="screen" rel="stylesheet" title="common" type="text/css" />
+    <meta content="text/html, charset=UTF-8" http-equiv="content-type" />
+    <title>JSXAAL Interactive Questions Example</title>
+	<link rel="stylesheet" href="../../dist/jsxaal.css"/>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <a href="http://xaal.org/"><img alt="Logo of Xaal" class="logoImage" src="../project.png" title="Xaal - eXtensible Algorithm Animation Language" /></a>
+      </div>
+      <div id="page">
+        <div id="page-content">
+          <div id="content">
+            <h1 class="content-title">Example Xaal Animation using Interactive Questions in JSXaal</h1>
+            <div class="section">
+              <p>
+                The following shows an example of the interactive questions in JSXaal Xaal animation viewer. If you are not seeing anything, you
+                either have an unsuitable browser or something is broken. It should work at least in Firefox 3+ and
+                Safari 3+. It definitely won't work in IE. If it is broken in a supported browser, 
+                <a href="mailto:vkaravir@cs.hut.fi">let me know</a>. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+	  <div id="animation" class="jsxaal" style="width:640px;height:480px;margin:0 auto;"></div>
+    <br/>
+    <div id="footer">
+        <div id="siteinfo-feedback">
+          Send feedback about the page to:<a href="mailto:vkaravir@cs.hut.fi?subject=XAAL-Feedback:index.html" id="feedbackto">vkaravir@cs.hut.fi</a>
+        </div>
+      </div>
+    </div>
+  <style type="text/css">
+	#shutter {
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		z-index:999;
+		display:none;
+		background-color:gray;
+		opacity:0.1;
+	}
+	#interaction {
+		z-index:1000;
+		position:absolute;
+		top:10%;
+		left: 40%;
+		background:white;
+		padding:10px;
+		border: 1pt solid black;
+	}
+	<!--[if IE]>
+#shutter {opacity:10;}
+<![endif]-->
+</style>
+    <script type="text/javascript" src="../../lib/prototype.js"></script>
+    <script type="text/javascript" src="../../lib/scriptaculous.js?load=effects"></script>
+    <script type="text/javascript" src="../../lib/pgf-core.js"></script>
+    <script type="text/javascript" src="../../lib/pgf-renderer.js"></script>
+    <script type="text/javascript" src="../../lib/ProgressBar-1.0.1.js"></script>
+    <script type="text/javascript" src="../../dist/jsxaal-core-min.js"></script>
+	<script type="text/javascript">
+		var viewer;
+		Event.observe(window, 'load', function() {
+		    viewer = new JSXaalViewer("animation", {settingsPanel: true, showNarrative: false, smoothAnimate: false}, {fileUrl: "xaal-interaction-demo.xml"});
+		});
+</script>
+</body>
+</html>
